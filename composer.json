@@ -1,0 +1,35 @@
+{
+  "name": "boekkooi/amqp-extension",
+  "description": "A behat extension for the AMQP bundle",
+  "license": "MIT",
+  "type": "library",
+  "authors": [{
+    "name": "Warnar Boekkooi",
+    "email": "warnar@boekkooi.net"
+  }],
+  "autoload": {
+    "psr-4": {
+      "Boekkooi\\Behat\\AmqpExtension\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\Boekkooi\\Behat\\AmqpExtension\\": "tests"
+    }
+  },
+  "prefer-stable": true,
+  "minimum-stability": "dev",
+  "require": {
+    "boekkooi/amqp-bundle": "^0.2",
+
+    "behat/behat": "~3.0",
+    "behat/symfony2-extension": "~2.0"
+  },
+  "require-dev": {
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.1-dev"
+    }
+  }
+}

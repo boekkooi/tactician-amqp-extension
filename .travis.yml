@@ -1,0 +1,26 @@
+language: php
+
+php:
+  - 5.5
+  - 5.6
+  - 7.0
+
+matrix:
+  include:
+    - php: 5.5
+      env:
+        - COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
+  allow_failures:
+    - php: 7.0
+
+install:
+  - echo "extension = amqp.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - travis_retry wget http://get.sensiolabs.org/php-cs-fixer.phar -O php-cs-fixer.phar
+
+before_script:
+  - travis_retry composer self-update
+  - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction
+
+script:
+  - vendor/bin/phpunit ${COVERAGE}
+  - php php-cs-fixer.phar fix src/ --level=psr2 --dry-run
