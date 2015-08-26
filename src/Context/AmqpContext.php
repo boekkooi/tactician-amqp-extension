@@ -10,7 +10,8 @@ use Boekkooi\Bundle\AMQP\Command\QueueConsumeCommand;
 use Boekkooi\Bundle\AMQP\Transformer\CommandTransformer;
 use Boekkooi\Tactician\AMQP\Middleware\CommandTransformerMiddleware;
 use Boekkooi\Tactician\AMQP\Middleware\PublishMiddleware;
-use Boekkooi\Tactician\AMQP\Publisher\DirectPublisher;
+use Boekkooi\Tactician\AMQP\Publisher\ExchangeDirectPublisher;
+use Boekkooi\Tactician\AMQP\Publisher\Locator\DirectPublisherLocator;
 use League\Tactician\CommandBus;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -59,7 +60,11 @@ class AmqpContext implements Context, KernelAwareContext
             $commandTransformer,
             [ get_class($command) ]
         );
-        $publishMiddleware = new PublishMiddleware(new DirectPublisher($exchange));
+        $publishMiddleware = new PublishMiddleware(
+            new DirectPublisherLocator(
+                new ExchangeDirectPublisher($exchange)
+            )
+        );
 
         $bus = new CommandBus([$commandTransformerMiddleware, $publishMiddleware]);
         $bus->handle($command);
