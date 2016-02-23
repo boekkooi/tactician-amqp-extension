@@ -115,4 +115,15 @@ class AmqpContext implements Context, KernelAwareContext
             ->get('boekkooi.amqp.tactician.exchange_locator')
             ->getExchangeForMessage($dummyMessage);
     }
+
+    /**
+     * @param string $vhost
+     * @return \Boekkooi\Bundle\AMQP\Consumer\Consumer
+     */
+    protected function getConsumerForVhost($vhost)
+    {
+        return $this->getContainer()
+            ->get(sprintf(BoekkooiAMQPExtension::SERVICE_VHOST_CONSUMER_ID, $vhost))
+        ;
+    }
 }
