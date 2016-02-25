@@ -7,6 +7,7 @@ use Behat\Symfony2Extension\Context\KernelDictionary;
 use Boekkooi\Bundle\AMQP\CommandConfiguration;
 use Boekkooi\Bundle\AMQP\CommandMessage;
 use Boekkooi\Bundle\AMQP\Command\QueueConsumeCommand;
+use Boekkooi\Bundle\AMQP\DependencyInjection\BoekkooiAMQPExtension;
 use Boekkooi\Bundle\AMQP\Transformer\CommandTransformer;
 use Boekkooi\Tactician\AMQP\Middleware\CommandTransformerMiddleware;
 use Boekkooi\Tactician\AMQP\Middleware\PublishMiddleware;
